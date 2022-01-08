@@ -68,6 +68,8 @@ export default class Rendering {
     const list = data.filter((item) => item !== userName);
     list.unshift(userName);
 
+    this.contacts.innerHTML = '';
+
     for (let i = 0; i < list.length; i += 1) {
       const divContact = document.createElement('div');
       divContact.classList.add('contact');

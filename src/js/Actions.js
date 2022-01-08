@@ -20,7 +20,7 @@ export default class Actions {
   }
 
   connection() {
-    // this.ws = new WebSocket('ws://localhost:8080/ws');
+    // this.ws = new WebSocket('ws://localhost:7020/ws');
     this.ws = new WebSocket('wss://hw-ahj-3-1-back.herokuapp.com/ws');
 
     this.ws.addEventListener('message', (event) => {
@@ -35,6 +35,7 @@ export default class Actions {
       if (response.event === 'failedLogin') {
         this.user = null;
         this.page.warning.classList.remove('hidden');
+        this.page.warning.querySelector('.warning').innerHTML = '&#9888; Данное имя уже занято. Пожалуйста, выберите другое.';
       }
 
       if (response.event === 'newUser') {
@@ -62,7 +63,8 @@ export default class Actions {
         }));
         this.page.registrationForm.querySelector('.registration-input').value = '';
       } else {
-        this.connection();
+        this.page.warning.classList.remove('hidden');
+        this.page.warning.querySelector('.warning').innerHTML = '&#9888; Соедение прервано.';
       }
     }
   }
@@ -86,7 +88,8 @@ export default class Actions {
         }));
         this.page.inputField.value = '';
       } else {
-        this.connection();
+        this.page.warning.classList.remove('hidden');
+        this.page.warning.querySelector('.warning').innerHTML = '&#9888; Соедение прервано.';
       }
     }
   }
